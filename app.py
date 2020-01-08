@@ -58,6 +58,12 @@ def get_dogs():
     result = dogs_schema.dump(all_dogs)
     return jsonify(result)
 
+#fetch single dog
+@app.route('/dog/<id>',methods=['GET'])
+def get_dog(id):
+    dog = Dog.query.get(id)
+    return dog_schema.jsonify(dog)
+
 # run server
 if __name__ == '__main__':
     app.run(debug=True)
