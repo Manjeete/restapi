@@ -64,6 +64,25 @@ def get_dog(id):
     dog = Dog.query.get(id)
     return dog_schema.jsonify(dog)
 
+#Update the dog's data    
+@app.route('/dog/<id>', methods=['PUT'])
+def update_dog(id):
+    dog = Dog.query.get(id)
+
+    breed = request.json['breed']
+    url = request.json['url']
+    averageAge = request.json['averageAge']
+    description = request.json['description']
+
+    dog.breed = breed
+    dog.url = url
+    dog.averageAge = averageAge
+    dog.description = description
+
+    db.session.commit()
+
+    return dog_schema.jsonify(dog)
+
 # run server
 if __name__ == '__main__':
     app.run(debug=True)
