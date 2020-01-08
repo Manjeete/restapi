@@ -83,6 +83,14 @@ def update_dog(id):
 
     return dog_schema.jsonify(dog)
 
+#delete dog
+@app.route('/dog/<id>',methods=['DELETE'])
+def delete_dog(id):
+    dog = Dog.query.get(id)
+    db.session.delete(dog)
+    db.session.commit()
+    return dog_schema.jsonify(dog)
+
 # run server
 if __name__ == '__main__':
     app.run(debug=True)
