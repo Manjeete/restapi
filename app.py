@@ -37,6 +37,13 @@ class DogSchema(ma.Schema):
 dog_schema = DogSchema( )
 dogs_schema = DogSchema(many=True)   
 
+
+#default route
+@app.route('/')
+def hello():
+    return "Hello World"
+
+#creaing dog data and post 
 @app.route('/dog', methods=['POST'])
 def add_dog():
     breed = request.json['breed']
